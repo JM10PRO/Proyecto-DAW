@@ -41,14 +41,14 @@ sudo a2ensite wordpress
 ```bash
 sudo a2enmod rewrite
 ```
-### Desactivamos el sitio predeterminado "It Works" para agregar un nombre de host para que WordPress responda a las solicitudes:
+### Desactivamos el sitio predeterminado _"It Works"_ para agregar un nombre de host para que WordPress responda a las solicitudes:
 ```bash
 sudo a2dissite 000-default
 ```
-### En el fichero _ wordpress.conf _ añadimos:
+### En el fichero _wordpress.conf_ añadimos el host donde servirá WordPress (centro.intranet):
 ```bash
 <VirtualHost *:80>
-    ServerName hostname.example.com
+    ServerName centro.intranet
     ... # el resto de la configuración de VHost
 </VirtualHost>
 ```
@@ -69,8 +69,31 @@ sudo mysql -u root
 ```bash
 sudo service mysql start
 ```
-### Añadimos al fichero /etc/hosts estos dos dominios (centro.intranet y departamentos.centro.intranet):
-![dominios](img/dominios.png)
+### Configuramos la conexión a la base de datos:
+```bash
+sudo -u www-data cp /srv/www/wordpress/wp-config-sample.php /srv/www/wordpress/wp-config.php
+sudo -u www-data sed -i 's/database_name_here/wordpress/' /srv/www/wordpress/wp-config.php
+sudo -u www-data sed -i 's/username_here/wordpress/' /srv/www/wordpress/wp-config.php
+sudo -u www-data sed -i 's/password_here/<your-password>/' /srv/www/wordpress/wp-config.php
+```
+### Abrimos en la terminal el siguente fichero y terminamos de configurarlo:
+```bash
+sudo -u www-data nano /srv/www/wordpress/wp-config.php
+```
+```bash
+define( 'AUTH_KEY',         'put your unique phrase here' );
+define( 'SECURE_AUTH_KEY',  'put your unique phrase here' );
+define( 'LOGGED_IN_KEY',    'put your unique phrase here' );
+define( 'NONCE_KEY',        'put your unique phrase here' );
+define( 'AUTH_SALT',        'put your unique phrase here' );
+define( 'SECURE_AUTH_SALT', 'put your unique phrase here' );
+define( 'LOGGED_IN_SALT',   'put your unique phrase here' );
+define( 'NONCE_SALT',       'put your unique phrase here' );
+```
+#### Abrimos http://localhost/ en el navegador. Nos pedirá el título del nuevo sitio, nombre de usuario, contraseña y dirección de correo electrónico. Esta información es solo para WordPress y no proporcionan acceso a ninguna otra parte del servidor. Elije un nombre de usuario y una contraseña que sean diferentes a las credenciales de MySQL. 
+#### Ahora podemos iniciar sesión en http://localhost/wp-login.php. En el panel de WordPress, aparecerán un montón de iconos y opciones. En la opción de agregar post podemos escribir nuestro primer post, seguimos las opciones y ya estaría listo nuestro.
+
+## Ahora vamos a configurar un servidor con Python y Django.
 
 ### Activamos el módulo "wsgi" para permitir la ejecución de aplicaciones Python.
 ```bash
