@@ -50,6 +50,8 @@ sudo a2dissite 000-default
 ```bash
 <VirtualHost *:80>
     ServerName centro.intranet
+    ServerAlias www.centro.intranet
+    ServerAdmin webmaster@localhost
     ... # el resto de la configuración de VHost
 </VirtualHost>
 ```
@@ -96,18 +98,37 @@ define( 'NONCE_SALT',       'put your unique phrase here' );
 
 # Ahora vamos a configurar un servidor con Python y Django.
 
-### · Activamos el módulo "wsgi" para permitir la ejecución de aplicaciones Python.
+## · Activamos el módulo "wsgi" para permitir la ejecución de aplicaciones Python.
 ```bash
 apt install libapache2-mod-wsgi-py3 -y
 ```
 ![pythonwsgi](img/pythonwsgi.png)
+### Comprobamos que está activado
+![wsgipython](img/wsgipython.png)
 
-### · Creamos y desplegamos una pequeña aplicación python para comprobar que funciona correctamente.
+## · Creamos y desplegamos una pequeña aplicación python para comprobar que funciona correctamente.
+### Escribimos en un script de Python lo siguiente:
+```bash
+sudo nano /var/www/html/app.py
+```
+```bash
+def application(environ, start_response):
+    status = '200 OK'
+    output = b'APP CREADA CON PYTHON QUE SE EJECUTA DESDE WSGI EN APACHE\n'
+    response_headers = [('Content-type', 'text/plain'),
+                        ('Content-Length', str(len(output)))]
+    start_response(status, response_headers)
+    return [output] 
+```
+### Cambiamos los permisos con el siguiente comando:sudo
+```bash
+sudo chown www-data:www-data /var/www/html/app.py
+sudo chmod 775 /var/www/html/app.py
+```
+## · Adicionalmente protegeremos el acceso a la aplicación python mediante autenticación.
 
-### · Adicionalmente protegeremos el acceso a la aplicación python mediante autenticación.
+## · Instala y configura awstat.
 
-### · Instala y configura awstat.
-
-### · Instala un segundo servidor de tu elección (nginx, lighttpd) bajo el dominio “servidor2.centro.intranet”. Debes configurarlo para que sirva en el puerto 8080 y haz los cambios necesarios para ejecutar php. Instala phpmyadmin.
+## · Instala un segundo servidor de tu elección (nginx, lighttpd) bajo el dominio “servidor2.centro.intranet”. Debes configurarlo para que sirva en el puerto 8080 y haz los cambios necesarios para ejecutar php. Instala phpmyadmin.
 
 
