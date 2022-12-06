@@ -52,8 +52,34 @@ sudo a2dissite 000-default
     ... # el resto de la configuración de VHost
 </VirtualHost>
 ```
-#### A partir de ahora los comandos ilustrados son ejecutados con usuario root.
-![wordpress2](img/wordpress2.png)
+### Recargamos apache2:
+```bash
+sudo service apache2 reload
+```
+## Configurando la base de datos
+### Para configurar WordPress, necesitamos crear una base de datos MySQL.
+```bash
+sudo mysql -u root
+```
+![mysql](img/mysql.png)
+```bash
+mysql> CREATE DATABASE wordpress;
+Query OK, 1 row affected (0,00 sec)
+
+mysql> CREATE USER wordpress@localhost IDENTIFIED BY '<your-password>';
+Query OK, 1 row affected (0,00 sec)
+
+mysql> GRANT SELECT,INSERT,UPDATE,DELETE,CREATE,DROP,ALTER
+    -> ON wordpress.*
+    -> TO wordpress@localhost;
+Query OK, 1 row affected (0,00 sec)
+
+mysql> FLUSH PRIVILEGES;
+Query OK, 1 row affected (0,00 sec)
+
+mysql> quit
+Bye
+```
 
 ### Añadimos al fichero /etc/hosts estos dos dominios (centro.intranet y departamentos.centro.intranet):
 ![dominios](img/dominios.png)
