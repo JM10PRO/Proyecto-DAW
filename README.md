@@ -152,8 +152,47 @@ Escribimos en el fichero lo siguiente:
 ```
 ### Ahora nuestra aplicación estará restringida para los usuarios que hemos incluido en el archivo _htpasswd_
 ![htpasswdexample](img/htpasswdexample.png)
+
 ## · Instala y configura awstat.
 
+Instalamos awstat con el siguiente comando:
+
+```bash
+  sudo apt install awstats
+```
+
+![awstats1](img/awstats1.png)
+
+Después habilitamos el módulo CGI y reiniciamos apache2:
+
+```bash
+sudo a2enmod cgi
+systemctl restart apache2
+```
+
+![awstats2](img/awstats2.png)
+
+Creamos un archivo de configuracion para el dominio "centro.intranet" en nuestro caso con el siguiente comando:
+
+```bash
+  sudo cp /etc/awstats/awstats.conf /etc/awstats/awstats.centro.intranet.conf
+```
+
+Entramos al archivo de configuración y escribimos lo siguiente:
+
+```bash
+  sudo nano /etc/awstats/awstats.centro.intranet.conf
+``` 
+
+```bash
+  SiteDomain="centro.intranet"
+  HostAliases="centro.intranet localhost 127.0.0.1"
+```
+
+![awstats3](img/awstats3.png)
+
+Por último, accedemos desde el siguiente link en un navegador "http://centro.intranet/cgi-bin/awstats.pl?config=centro.intranet" y nos mostrará esta web donde se estará ejecutado el AWSTATS.
+
+![awstats4](img/awstats4.png)
+
 ## · Instala un segundo servidor de tu elección (nginx, lighttpd) bajo el dominio “servidor2.centro.intranet”. Debes configurarlo para que sirva en el puerto 8080 y haz los cambios necesarios para ejecutar php. Instala phpmyadmin.
-
-
