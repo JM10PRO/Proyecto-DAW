@@ -24,17 +24,17 @@ sudo nano /etc/apache2/sites-available/WordPress.conf
 Añadimos estas líneas al fichero:
 #imagen 1
 
-###Creamos un directorio para WordPress y activamos "mod_rewrite"
+### Creamos un directorio para WordPress y activamos "mod_rewrite"
 ####A partir de ahora los comandos ilustrados son ejecutados con usuario root.
 # imagen 2
 
-###Añadimos al fichero /etc/hosts estos dos dominios (centro.intranet y departamentos.centro.intranet):
+### Añadimos al fichero /etc/hosts estos dos dominios (centro.intranet y departamentos.centro.intranet):
 #imagen 3
 
-###Activamos el módulo "wsgi" para permitir la ejecución de aplicaciones Python.
+### Activamos el módulo "wsgi" para permitir la ejecución de aplicaciones Python.
 ```bash
 apt install libapache2-mod-wsgi-py3 -y
 ```
 #imagen 4
 
-###Creamos y desplegamos una pequeña aplicación python para comprobar que funciona correctamente.
+### Creamos y desplegamos una pequeña aplicación python para comprobar que funciona correctamente.
