@@ -191,7 +191,7 @@ Entramos al archivo de configuración y escribimos lo siguiente:
 
 ![awstats3](img/awstats3.png)
 
-Por último, accedemos desde el siguiente link en un navegador "http://centro.intranet/cgi-bin/awstats.pl?config=centro.intranet" y nos mostrará esta web donde se estará ejecutado el AWSTATS.
+Por último, accedemos desde el siguiente link en un navegador "http://centro.intranet/cgi-bin/awstats.pl?config=centro.intranet" y nos mostrará esta web donde se estará ejecutando el AWSTATS.
 
 ![awstats4](img/awstats4.png)
 
