@@ -96,7 +96,7 @@ define( 'NONCE_SALT',       'put your unique phrase here' );
 #### Abrimos http://localhost/ en el navegador. Nos pedirá el título del nuevo sitio, nombre de usuario, contraseña y dirección de correo electrónico. Esta información es solo para WordPress y no proporcionan acceso a ninguna otra parte del servidor. Elije un nombre de usuario y una contraseña que sean diferentes a las credenciales de MySQL. 
 #### Ahora podemos iniciar sesión en http://localhost/wp-login.php. En el panel de WordPress, aparecerán un montón de iconos y opciones. En la opción de agregar post podemos escribir nuestro primer post, seguimos las opciones y ya estaría listo nuestro.
 
-# Ahora vamos a configurar un servidor con Python y Django.
+# Ahora vamos a configurar un servidor con Python y el módulo WSGI de Apache.
 
 ## · Activamos el módulo "wsgi" para permitir la ejecución de aplicaciones Python.
 ```bash
@@ -125,8 +125,32 @@ def application(environ, start_response):
 sudo chown www-data:www-data /var/www/html/app.py
 sudo chmod 775 /var/www/html/app.py
 ```
-## · Adicionalmente protegeremos el acceso a la aplicación python mediante autenticación.
+### Luego añadimos estas líneas de código al fichero 000-default.conf:
+![wsgi-conf](img/wsgi-conf.png)
 
+### Ahora en el navegador, si escribimos http://departamentos.centro.intranet/app nos aparecerá el mensaje de nuestro script de Python desde el servidor.
+![pythonapp3](img/pythonapp3.png)
+
+## · Adicionalmente protegeremos el acceso a la aplicación python mediante autenticación.
+### Creamos el archivo necesario con un usuario y en la siguiente línea indicamos la contraseña.
+```bash
+sudo htpasswd -c /etc/apache2/.htpasswd userjm
+```
+![htpasswd](img/htpasswd.png)
+
+```bash
+sudo nano /etc/apache2/sites-available/000-default.conf
+```
+Escribimos en el fichero lo siguiente:
+```bash
+<Directory /var/www/html/app.py>
+        AuthType Basic
+        AuthName "Autenticacion Obligatorio"
+        AuthUserFile /etc/apache2/.htpasswd
+        Require valid-user
+</Directory>
+```
+### Ahora nuestra aplicación estará restringida para los usuarios que hemos incluido en el archivo _htpasswd_
 ## · Instala y configura awstat.
 
 ## · Instala un segundo servidor de tu elección (nginx, lighttpd) bajo el dominio “servidor2.centro.intranet”. Debes configurarlo para que sirva en el puerto 8080 y haz los cambios necesarios para ejecutar php. Instala phpmyadmin.
