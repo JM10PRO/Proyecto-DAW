@@ -1,12 +1,13 @@
 # Proyecto DAW
 #### Proyecto del módulo Despliegue de Aplicaciones Web
 
-## Instalación de Apache:
+# Apache
+##  · Instalación de Apache:
 ```bash
 sudo apt update
 sudo apt install apache2
 ```
-## Activación de los módulos necesarios para ejecutar PHP y acceder a MySql
+## · Activación de los módulos necesarios para ejecutar PHP y acceder a MySql
 ### Instalación de MySql:
 ```bash
 sudo apt install mysql-server
@@ -17,7 +18,7 @@ sudo apt install php libapache2-mod-php php-mysql
 ```
 ## Comprobamos la instalación:
 ![apachestatus](img/apachestatus.png)
-## Instalando y cofigurando WordPress:
+## · Instalando y cofigurando WordPress:
 ```bash
 sudo mkdir -p /srv/www
 sudo chown www-data: /srv/www
@@ -93,13 +94,20 @@ define( 'NONCE_SALT',       'put your unique phrase here' );
 #### Abrimos http://localhost/ en el navegador. Nos pedirá el título del nuevo sitio, nombre de usuario, contraseña y dirección de correo electrónico. Esta información es solo para WordPress y no proporcionan acceso a ninguna otra parte del servidor. Elije un nombre de usuario y una contraseña que sean diferentes a las credenciales de MySQL. 
 #### Ahora podemos iniciar sesión en http://localhost/wp-login.php. En el panel de WordPress, aparecerán un montón de iconos y opciones. En la opción de agregar post podemos escribir nuestro primer post, seguimos las opciones y ya estaría listo nuestro.
 
-## Ahora vamos a configurar un servidor con Python y Django.
+# Ahora vamos a configurar un servidor con Python y Django.
 
-### Activamos el módulo "wsgi" para permitir la ejecución de aplicaciones Python.
+### · Activamos el módulo "wsgi" para permitir la ejecución de aplicaciones Python.
 ```bash
 apt install libapache2-mod-wsgi-py3 -y
 ```
 ![pythonwsgi](img/pythonwsgi.png)
 
-### Creamos y desplegamos una pequeña aplicación python para comprobar que funciona correctamente.
+### · Creamos y desplegamos una pequeña aplicación python para comprobar que funciona correctamente.
+
+### · Adicionalmente protegeremos el acceso a la aplicación python mediante autenticación.
+
+### · Instala y configura awstat.
+
+### · Instala un segundo servidor de tu elección (nginx, lighttpd) bajo el dominio “servidor2.centro.intranet”. Debes configurarlo para que sirva en el puerto 8080 y haz los cambios necesarios para ejecutar php. Instala phpmyadmin.
+
 
