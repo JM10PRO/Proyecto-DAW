@@ -62,25 +62,13 @@ sudo service apache2 reload
 sudo mysql -u root
 ```
 ![mysql](img/mysql.png)
+![mysql2](img/mysql2.png)
+![mysql3](img/mysql3.png)
+
+### Habilitamos MySQL:
 ```bash
-mysql> CREATE DATABASE wordpress;
-Query OK, 1 row affected (0,00 sec)
-
-mysql> CREATE USER wordpress@localhost IDENTIFIED BY '<your-password>';
-Query OK, 1 row affected (0,00 sec)
-
-mysql> GRANT SELECT,INSERT,UPDATE,DELETE,CREATE,DROP,ALTER
-    -> ON wordpress.*
-    -> TO wordpress@localhost;
-Query OK, 1 row affected (0,00 sec)
-
-mysql> FLUSH PRIVILEGES;
-Query OK, 1 row affected (0,00 sec)
-
-mysql> quit
-Bye
+sudo service mysql start
 ```
-
 ### Añadimos al fichero /etc/hosts estos dos dominios (centro.intranet y departamentos.centro.intranet):
 ![dominios](img/dominios.png)
 
