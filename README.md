@@ -196,3 +196,105 @@ Por último, accedemos desde el siguiente link en un navegador "http://centro.in
 ![awstats4](img/awstats4.png)
 
 ## · Instala un segundo servidor de tu elección (nginx, lighttpd) bajo el dominio “servidor2.centro.intranet”. Debes configurarlo para que sirva en el puerto 8080 y haz los cambios necesarios para ejecutar php. Instala phpmyadmin.
+
+### Instalamos NGINX con el siguiente comando:
+```bash
+  apt install nginx mlocate
+```
+
+![image](https://user-images.githubusercontent.com/91668406/204364860-feaee5c3-7074-428e-b2ae-07830353bc9a.png)
+
+### Instalamos el paquete PHP:
+
+```bash
+  apt install php-fpm
+```
+
+![image](https://user-images.githubusercontent.com/91668406/204365005-6f5dfb18-25f3-42da-8b83-41195efac469.png)
+
+### Instanciamos el nuevo servidor (dominio) en /etc/hosts:
+
+![image](https://user-images.githubusercontent.com/91668406/204382981-ec3b2335-9c01-4c1f-9a5e-576606c45341.png)
+
+### Instalamos y descomprimimos el phpmyadmin:
+
+```bash
+  sudo wget https://files.phpmyadmin.net/phpMyAdmin/5.2.0/phpMyAdmin-5.2.0-all-languages.tar.gz
+  tar -zvf phpMyAdmin-5.2.0-all-languages.tar.gz
+```
+  
+### Movemos el php a nuestra carpeta donde tendremos phpmyadmin /var/www/phpmyadmin
+
+```bash
+  sudo mv phpMyAdmin-4.9.5-all-languages /var/www/phpmyadmin
+```
+
+### A continuación, movemos la plantilla del archivo de configuracion de PHPMYADMIN y le cambiamos el nombre.
+
+```bash
+  sudo cp /var/www/phpmyadmin/config.sample.inc.php /var/www/phpmyadmin/config.inc.php
+```
+
+### Generamos el "blowfish_secret" con este comando
+
+```bash
+  sudo apt install pwgen
+  pwgen -s 32 1
+```
+
+### Entramos al archivo de configuracion con el siguiente comando:
+
+```bash
+  sudo nano /var/www/phpmyadmin/config.inc.php
+```
+### Realizamos los siguientes cambios:
+
+```bash
+  $cfg['blowfish_secret'] = 'codigo generado automaticamente anteriormente';
+  $cfg['Servers'][$i]['controlhost'] = 'localhost';
+  $cfg['Servers'][$i]['controlport'] = '';
+  $cfg['Servers'][$i]['controluser'] = 'marc';
+  $cfg['Servers'][$i]['controlpass'] = 'password';
+```
+
+![image](https://user-images.githubusercontent.com/91668406/204385182-72f8fe1c-e0d5-4c3f-8fa6-b2145f70e6ce.png)
+![image](https://user-images.githubusercontent.com/91668406/204385237-7dc279ff-50aa-44b3-8321-65a60f3c78fb.png)
+
+### Importamos la base de datos que ya viene incluida en phpmyadmin por defecto:
+
+```bash
+  sudo mysql < /var/www/phpmyadmin/sql/create_tables.sql -u root -p
+```
+
+![image](https://user-images.githubusercontent.com/91668406/204385349-bc990cd2-b684-4ead-bdad-1e8295ff371f.png)
+
+### Nos damos permisos a nuestro usuario a la base de datos de phpmyadmin:
+
+![image](https://user-images.githubusercontent.com/91668406/204385619-2e07f0d0-8d04-46b2-b950-bb1dc6134036.png)
+
+### Configuramos el servidor para poder acceder a phpmyadmin con el siguiente comando:
+
+```bash
+  sudo nano /etc/nginx/sites-available/phpmyadmin.conf
+```
+
+![image](https://user-images.githubusercontent.com/91668406/204385854-36a3ef13-133d-4e0f-8f9e-f13485515c94.png)
+
+### Y añadimos lo siguiente:
+
+![image](https://user-images.githubusercontent.com/91668406/204386019-f02a2eb6-a4e3-48d0-9ff4-ca59c702528b.png)
+
+### Para finalizar cambiamos los permisos de phpmyadmin con el siguiente comando y reiniciamos los servicios.
+
+```bash
+  sudo chown -R www-data:www-data /var/www/phpmyadmin
+  sudo systemctl restart nginx php8.1-fpm  
+```
+
+### Si accedemos con "servidor2.centro.intranet:8080 nos saldra la siguiente ventana:
+
+![image](https://user-images.githubusercontent.com/91668406/204386376-5e1a3f4e-1ca8-4a5d-b7c9-21516b843f7c.png)
+
+### Y si ponemos las credenciales entraremos dentro del phpmyadmin:
+
+![image](https://user-images.githubusercontent.com/91668406/204379493-76d4ee13-37a7-409a-b635-23417832d49d.png)
