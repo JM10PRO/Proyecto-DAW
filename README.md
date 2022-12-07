@@ -202,7 +202,7 @@ Por último, accedemos desde el siguiente link en un navegador "http://centro.in
   apt install nginx mlocate
 ```
 
-![image](https://user-images.githubusercontent.com/91668406/204364860-feaee5c3-7074-428e-b2ae-07830353bc9a.png)
+![nginx1](img/nginx1.png)
 
 ### Instalamos el paquete PHP:
 
@@ -210,13 +210,13 @@ Por último, accedemos desde el siguiente link en un navegador "http://centro.in
   apt install php-fpm
 ```
 
-![image](https://user-images.githubusercontent.com/91668406/204365005-6f5dfb18-25f3-42da-8b83-41195efac469.png)
+![nginx2](img/nginx2.png)
 
-### Instanciamos el nuevo servidor (dominio) en /etc/hosts:
+### Añadimos el nuevo dominio en /etc/hosts:
 
-![image](https://user-images.githubusercontent.com/91668406/204382981-ec3b2335-9c01-4c1f-9a5e-576606c45341.png)
+![nginx3](img/nginx3.png)
 
-### Instalamos y descomprimimos el phpmyadmin:
+### Instalamos y descomprimimos el paquete _phpmyadmin_:
 
 ```bash
   sudo wget https://files.phpmyadmin.net/phpMyAdmin/5.2.0/phpMyAdmin-5.2.0-all-languages.tar.gz
