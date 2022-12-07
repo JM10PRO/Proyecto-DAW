@@ -220,13 +220,13 @@ Por último, accedemos desde el siguiente link en un navegador "http://centro.in
 
 ```bash
   sudo wget https://files.phpmyadmin.net/phpMyAdmin/5.2.0/phpMyAdmin-5.2.0-all-languages.tar.gz
-  tar -zvf phpMyAdmin-5.2.0-all-languages.tar.gz
+  tar -xf phpMyAdmin-5.2.0-all-languages.tar.gz
 ```
   
-### Movemos el php a nuestra carpeta donde tendremos phpmyadmin /var/www/phpmyadmin
+### Movemos el directorio de phpMyAdmin a la carpeta donde tendremos phpmyadmin **/var/www/phpmyadmin**
 
 ```bash
-  sudo mv phpMyAdmin-4.9.5-all-languages /var/www/phpmyadmin
+  sudo mv phpMyAdmin-5.2.0-all-languages /var/www/phpmyadmin
 ```
 
 ### A continuación, movemos la plantilla del archivo de configuracion de PHPMYADMIN y le cambiamos el nombre.
