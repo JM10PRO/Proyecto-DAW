@@ -1,13 +1,13 @@
-# Proyecto DAW
+# Práctica de Servidores Web 1º trimestre 2ºDAW
 #### Proyecto del módulo Despliegue de Aplicaciones Web
 
-# Apache
-##  · Instalación de Apache:
+## Apache
+###  · Instalación de Apache:
 ```bash
 sudo apt update
 sudo apt install apache2
 ```
-## · Activación de los módulos necesarios para ejecutar PHP y acceder a MySql
+### · Activación de los módulos necesarios para ejecutar PHP y acceder a MySql
 ### Instalación de MySql:
 ```bash
 sudo apt install mysql-server
@@ -16,9 +16,9 @@ sudo apt install mysql-server
 ```bash
 sudo apt install php libapache2-mod-php php-mysql
 ```
-## Comprobamos la instalación:
+### Comprobamos la instalación:
 ![apachestatus](img/apachestatus.png)
-## · Instalando y cofigurando WordPress:
+### · Instalando y cofigurando WordPress:
 ```bash
 sudo mkdir -p /srv/www
 sudo chown www-data: /srv/www
@@ -199,10 +199,21 @@ Por último, accedemos desde el siguiente link en un navegador "http://centro.in
 
 ### Instalamos NGINX con el siguiente comando:
 ```bash
-  apt install nginx mlocate
+  sudo apt install nginx
 ```
 
 ![nginx1](img/nginx1.png)
+
+### Aplicamos ajustes al firewall, enumeramos las configuraciones con: 
+```bash
+    sudo ufw app list
+```
+![nginx1-1](img/nginx1-1.png)
+
+### Habilitamos escribiendo lo siguiente:
+```bash
+    sudo ufw allow 'Nginx HTTP'
+```
 
 ### Instalamos el paquete PHP:
 
@@ -229,7 +240,7 @@ Por último, accedemos desde el siguiente link en un navegador "http://centro.in
   sudo mv phpMyAdmin-5.2.0-all-languages /var/www/phpmyadmin
 ```
 
-### A continuación, movemos la plantilla del archivo de configuracion de PHPMYADMIN y le cambiamos el nombre.
+### A continuación, movemos la plantilla del archivo de configuración de PHPMYADMIN y le cambiamos el nombre.
 
 ```bash
   sudo cp /var/www/phpmyadmin/config.sample.inc.php /var/www/phpmyadmin/config.inc.php
@@ -242,7 +253,7 @@ Por último, accedemos desde el siguiente link en un navegador "http://centro.in
   pwgen -s 32 1
 ```
 
-### Entramos al archivo de configuracion con el siguiente comando:
+### Entramos al archivo de configuración con el siguiente comando:
 
 ```bash
   sudo nano /var/www/phpmyadmin/config.inc.php
@@ -250,17 +261,16 @@ Por último, accedemos desde el siguiente link en un navegador "http://centro.in
 ### Realizamos los siguientes cambios:
 
 ```bash
-  $cfg['blowfish_secret'] = 'codigo generado automaticamente anteriormente';
+  $cfg['blowfish_secret'] = 'codigo generado automáticamente anteriormente';
   $cfg['Servers'][$i]['controlhost'] = 'localhost';
   $cfg['Servers'][$i]['controlport'] = '';
-  $cfg['Servers'][$i]['controluser'] = 'marc';
-  $cfg['Servers'][$i]['controlpass'] = 'password';
+  $cfg['Servers'][$i]['controluser'] = 'josemaria';
+  $cfg['Servers'][$i]['controlpass'] = 'password1234';
 ```
 
-![image](https://user-images.githubusercontent.com/91668406/204385182-72f8fe1c-e0d5-4c3f-8fa6-b2145f70e6ce.png)
-![image](https://user-images.githubusercontent.com/91668406/204385237-7dc279ff-50aa-44b3-8321-65a60f3c78fb.png)
+![bdphpmyadmin](img/bdphpmyadmin.png)
 
-### Importamos la base de datos que ya viene incluida en phpmyadmin por defecto:
+### Importamos la base de datos que ya viene incluida en phpMyAdmin por defecto:
 
 ```bash
   sudo mysql < /var/www/phpmyadmin/sql/create_tables.sql -u root -p
@@ -277,8 +287,6 @@ Por último, accedemos desde el siguiente link en un navegador "http://centro.in
 ```bash
   sudo nano /etc/nginx/sites-available/phpmyadmin.conf
 ```
-
-![image](https://user-images.githubusercontent.com/91668406/204385854-36a3ef13-133d-4e0f-8f9e-f13485515c94.png)
 
 ### Y añadimos lo siguiente:
 
