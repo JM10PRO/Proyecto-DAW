@@ -276,11 +276,9 @@ Por último, accedemos desde el siguiente link en un navegador "http://centro.in
   sudo mysql < /var/www/phpmyadmin/sql/create_tables.sql -u root -p
 ```
 
-![image](https://user-images.githubusercontent.com/91668406/204385349-bc990cd2-b684-4ead-bdad-1e8295ff371f.png)
-
 ### Nos damos permisos a nuestro usuario a la base de datos de phpmyadmin:
 
-![image](https://user-images.githubusercontent.com/91668406/204385619-2e07f0d0-8d04-46b2-b950-bb1dc6134036.png)
+![phpmyadmin6](img/phpmyadmin6.png)
 
 ### Configuramos el servidor para poder acceder a phpmyadmin con el siguiente comando:
 
@@ -299,7 +297,7 @@ Por último, accedemos desde el siguiente link en un navegador "http://centro.in
   sudo systemctl restart nginx php8.1-fpm  
 ```
 
-### Si accedemos con "servidor2.centro.intranet:8080 nos saldra la siguiente ventana:
+### Si accedemos con "servidor2.centro.intranet:8080 nos aparecerá la siguiente ventana:
 
 ![image](https://user-images.githubusercontent.com/91668406/204386376-5e1a3f4e-1ca8-4a5d-b7c9-21516b843f7c.png)
 
