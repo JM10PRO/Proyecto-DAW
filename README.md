@@ -288,7 +288,7 @@ Por último, accedemos desde el siguiente link en un navegador "http://centro.in
 
 ### Y añadimos lo siguiente:
 
-![image](https://user-images.githubusercontent.com/91668406/204386019-f02a2eb6-a4e3-48d0-9ff4-ca59c702528b.png)
+![phpmyadmin6-1](img/phpmyadmin6-1.png)
 
 ### Para finalizar cambiamos los permisos de phpmyadmin con el siguiente comando y reiniciamos los servicios.
 
@@ -299,8 +299,8 @@ Por último, accedemos desde el siguiente link en un navegador "http://centro.in
 
 ### Si accedemos con "servidor2.centro.intranet:8080 nos aparecerá la siguiente ventana:
 
-![image](https://user-images.githubusercontent.com/91668406/204386376-5e1a3f4e-1ca8-4a5d-b7c9-21516b843f7c.png)
+![phpmyadmin7](img/phpmyadmin7.png)
 
 ### Y si ponemos las credenciales entraremos dentro del phpmyadmin:
 
-![image](https://user-images.githubusercontent.com/91668406/204379493-76d4ee13-37a7-409a-b635-23417832d49d.png)
+![phpmyadmin8](img/phpmyadmin8.png)
